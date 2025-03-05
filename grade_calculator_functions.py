@@ -1,5 +1,3 @@
-"""Enhanced Grade Calculator with Function Decomposition"""
-
 def get_student_score() -> float:
     """
     Handles user input to obtain the student's score.
@@ -9,13 +7,12 @@ def get_student_score() -> float:
     """
     while True:
         try:
-            score = float(input("Enter your score: "))  # Removed redundant int input
+            score = float(input("Enter your score (0-100): "))
             if 0 <= score <= 100:
                 return score
-            else:
-                print("Please enter a valid score between 0 and 100.")
+            print("Error: Please enter a score between 0 and 100.")
         except ValueError:
-            print("Invalid input. Please enter a numerical value.")
+            print("Error: Invalid input. Please enter a numerical value.")
 
 def calculate_grade(score: float) -> str:
     """
@@ -27,22 +24,32 @@ def calculate_grade(score: float) -> str:
     Returns:
         str: The corresponding letter grade.
     """
-    if score >= 90:
-        return "A"
-    elif score >= 80:
-        return "B"
-    elif score >= 70:
-        return "C"
-    elif score >= 60:
-        return "D"
-    else:
-        return "F"
+    grade_boundaries = {
+        (90, 100): "A",
+        (80, 89): "B",
+        (70, 79): "C",
+        (60, 69): "D",
+        (0, 59): "F",
+    }
+    
+    for (low, high), grade in grade_boundaries.items():
+        if low <= score <= high:
+            return grade
+
+def display_grade(grade: str):
+    """
+    Displays the student's letter grade.
+
+    Parameters:
+        grade (str): The letter grade to display.
+    """
+    print(f"Your Grade is: {grade}")
 
 def main():
     """Main program flow for grade calculation."""
     student_score = get_student_score()
     grade = calculate_grade(student_score)
-    print(f"Your Grade is: {grade}")
+    display_grade(grade)
 
 if __name__ == "__main__":
     main()
