@@ -1,46 +1,49 @@
-"""Enhanced Grade Calculator with Function Decomposition"""
-
 def get_student_score() -> float:
     """
-    Handles user input to obtain the student's score.
-    
-    Returns:
-        float: The numerical score entered by the user.
+    Prompts the user for their score, ensuring valid input.
+    Returns the score as a float.
     """
     while True:
         try:
+            # Prompting user for score input
             score = float(input("Enter your score: "))
+            # Validate the score is within the 0 to 100 range
             if 0 <= score <= 100:
                 return score
-            print("Please enter a valid score between 0 and 100.")
+            else:
+                print("Please enter a score between 0 and 100.")
         except ValueError:
-            print("Invalid input. Please enter a numerical value.")
+            # Catching invalid input (non-numeric)
+            print("Invalid input. Please enter a valid numerical score.")
 
 def calculate_grade(score: float) -> str:
     """
-    Determines the letter grade based on the given score.
-
-    Parameters:
-        score (float): The student's numerical score.
-
-    Returns:
-        str: The corresponding letter grade.
+    Calculates the grade based on the score.
+    Returns the grade as a string ('A', 'B', 'C', 'D', 'F').
     """
     if score >= 90:
-        return "A"
-    if score >= 80:
-        return "B"
-    if score >= 70:
-        return "C"
-    if score >= 60:
-        return "D"
-    return "F"
+        return 'A'
+    elif score >= 80:
+        return 'B'
+    elif score >= 70:
+        return 'C'
+    elif score >= 60:
+        return 'D'
+    return 'F'
 
 def main():
-    """Main program flow for grade calculation."""
-    student_score = get_student_score()
-    grade = calculate_grade(student_score)
+    """
+    Main function to handle the grade calculation process.
+    """
+    # Step 1: Get the student's score
+    score = get_student_score()
+    
+    # Step 2: Calculate the grade based on the score
+    grade = calculate_grade(score)
+    
+    # Step 3: Output the result to the user
     print(f"Your Grade is: {grade}")
 
-if _name_ == "_main_":
+# Calling the main function to run the program
+if __name__ == "__main__":
     main()
