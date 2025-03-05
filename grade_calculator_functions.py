@@ -53,7 +53,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-student_score = get_student_score()
-grade = calculate_grade(student_score)
-print(f"Your Grade is: {grade}")
